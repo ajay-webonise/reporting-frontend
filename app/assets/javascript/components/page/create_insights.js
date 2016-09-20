@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 
-class inFlightPlanner extends Component {
+class createInsights extends Component {
 
   constructor(props) {
     super(props);
@@ -144,4 +144,4 @@ class inFlightPlanner extends Component {
   }
 }
 
-export default inFlightPlanner;
+export default createInsights;

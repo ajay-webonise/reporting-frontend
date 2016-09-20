@@ -6,7 +6,7 @@ class reportList extends Component {
     return (
       <div className="container">
         <div className="page-header">
-          <h1>Reports <small>Page</small></h1>
+          <h1>All Insights</h1>
         </div>
         <table className="table table-striped">
           <thead>
@@ -15,7 +15,7 @@ class reportList extends Component {
               <th>Title</th>
               <th>Description</th>
               <th>Key</th>
-              <th>Exectue</th>
+              <th>Execute</th>
             </tr>
           </thead>
           <tbody>
@@ -24,7 +24,7 @@ class reportList extends Component {
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <td><Link className="btn btn-default" to="#">Exectue</Link></td>
+              <td><Link className="btn btn-default" to="#">Execute</Link></td>
             </tr>
           </tbody>
         </table>
