@@ -91,7 +91,7 @@ class inFlightPlanner extends Component {
     return (
       <div className="container">
         <div className="page-header">
-          <h1>inFlightPlanner <small>Page</small></h1>
+          <h1>Create Insight</h1>
         </div>
         <form onSubmit={this.submit.bind(this)}>
           <div className="form-group">
@@ -107,7 +107,7 @@ class inFlightPlanner extends Component {
             <input type="text" className="form-control" id="insightsKey" placeholder="Insights Key" defaultValue={this.state.insQueryKey} />
           </div>
           <div className="form-group">
-            <label htmlFor="insightsQuery">Enter Query* (**Implicit Parameters that are supported :-)</label>
+            <label htmlFor="insightsQuery">Enter Query</label>
             <textarea className="form-control" rows="3" id="insightsQuery" onChange={this.generateQuery.bind(this)} defaultValue={this.state.insQuery}></textarea>
           </div>
           <div className="form-group">

@@ -12,14 +12,13 @@ class header extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">Brand</a>
+            <a className="navbar-brand" href="#">Insights</a>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
             <ul className="nav navbar-nav">
-              <li><a href="#/flight-planer">flight planer</a></li>
-              <li><a href="#/reports">Reports</a></li>
-              <li><a href="#/about">About</a></li>
-            </ul>
+              <li><a href="#/flight-planer">Create Insight</a></li>
+              <li><a href="#/reports">List</a></li>
+             </ul>
           </div>
         </div>
       </nav>
