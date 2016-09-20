@@ -24,7 +24,7 @@
 
 ## Installation
 ```
-$ git clone git@github.com:ajayy004/react-bootstrap.git
+$ git clone git@github.com:ajay-webonise/reporting-frontend.git
 $ cd react-bootstrap
 $ npm install
 ```
