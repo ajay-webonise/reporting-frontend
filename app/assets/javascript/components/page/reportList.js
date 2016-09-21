@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import serialize from 'form-serialize';
+import Popup from 'react-popup';
+import _ from 'underscore';
 
-import { getInsights} from '../../services/api';
+import { getInsights, getInsightDetails, executeQuery } from '../../services/api';
 
 class reportList extends Component {
 
@@ -16,9 +19,13 @@ class reportList extends Component {
     getInsights(this);
   }
 
+  componentDidMount(){
+  }
+
   render() {
     return (
       <div className="container">
+        <Popup />
         <div className="page-header">
           <h1>All Insights</h1>
         </div>
@@ -55,6 +62,29 @@ class reportList extends Component {
 
 
 class Insight extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      insightDetails: false,
+      insightDetailsLoadingStatus: false
+    }
+  }
+
+  executeQuery(insQueryId, event) {
+    getInsightDetails(this, insQueryId);
+  }
+
+  shouldComponentUpdate(oldData, newData) {
+    console.log(newData)
+    Popup.create({
+        title: null,
+        content: <FormBuilder data={newData} />,
+        className: 'alert'
+    });
+    return true
+  }
+
   render() {
     return (
       <tr key  = {this.props.key}>
@@ -64,11 +94,48 @@ class Insight extends Component {
         <td>{this.props.insight.insQueryDescription}</td>
         <td>
           {this.props.insight.insQueryIsActive
-            ? <Link className="btn btn-default" to="#">Execute</Link>
+            ? <button className="btn btn-default" onClick={this.executeQuery.bind(this, this.props.insight.insQueryId)}>Execute</button>
             : <button className="btn btn-default" disabled>Execute</button>
           }
         </td>
       </tr>
+    )
+  }
+}
+
+class FormBuilder extends Component {
+
+  submit(event) {
+    event.preventDefault();
+    let form = document.querySelector('#query-form');
+    let obj = serialize(form, { hash: true });
+
+    let params = [];
+    _.mapObject(obj, function(val, key){
+      params.push({
+        name: key,
+        value: val
+      })
+    });
+    let formData = {};
+    formData.params = params;
+    formData.queryId = this.props.data.insQueryId;
+    executeQuery(this, formData);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.submit.bind(this)} id="query-form">
+        {this.props.data.insightDetails.map(function(field, key){
+          return (
+              <div className="form-group" key={key}>
+                <label htmlFor={field.insQryParamId +'-'+ field.insQryParamName}>{field.insQryQualifiedParamName}</label>
+                <input type="text" className="form-control" id={field.insQryParamId +'-'+ field.insQryParamName} name={field.insQryParamName} />
+              </div>
+            )
+        })}
+        <button className="btn btn-default">Submit</button>
+      </form>
     )
   }
 }

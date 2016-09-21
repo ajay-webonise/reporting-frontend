@@ -25,6 +25,31 @@ function getInsights($this, userData = null) {
   })
 }
 
+function getInsightDetails($this, insightId, userData = null) {
+  ajax({
+    url: '/api/insights/'+insightId,
+    type: 'GET',
+    contentType: 'application/json',
+    data: userData
+  }).then(
+    function successHandler(data) {
+      $this.setState({
+        insightDetails: data,
+        insQueryId: insightId,
+        insightDetailsLoadingStatus: true
+      });
+    },
+    function errorHandler(error, textStatus, errorThrown) {
+      $this.setState({
+        error: error,
+        insightDetailsLoadingStatus: true
+      });
+    }
+  ).catch(function errorHandler(error) {
+    console.error(error)
+  })
+}
+
 function createInsight($this, userData = null) {
   ajax({
     url: '/api/insights/',
@@ -48,8 +73,31 @@ function createInsight($this, userData = null) {
   })
 }
 
+function executeQuery($this, userData = null) {
+  ajax({
+    url: '/api/insights/results',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(userData)
+  }).then(
+    function successHandler(data) {
+      // navigate to next page
+      console.log(data);
+    },
+    function errorHandler(error, textStatus, errorThrown) {
+      $this.setState({
+        error: error
+      });
+    }
+  ).catch(function errorHandler(error) {
+    console.error(error)
+  })
+}
+
 
 module.exports = {
   getInsights,
-  createInsight
+  getInsightDetails,
+  createInsight,
+  executeQuery
 };

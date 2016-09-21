@@ -19,7 +19,7 @@ const Root = React.createClass({
         <Route name='home' path='/' component={HomeContainer}>
           <IndexRoute component={Home} />
           <Route name="about" path='/about' component={About} />
-          <Route name="InFlightPlaner" path='/flight-planer' component={CreateInsights} />
+          <Route name="nsightsPlaner" path='/insights-planer' component={CreateInsights} />
           <Route name="Reports" path='/reports' component={Reports} />
         </Route>
         <Route path="*" component={PageNotFound} />

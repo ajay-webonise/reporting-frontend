@@ -57,9 +57,11 @@
   },
   "dependencies": {
     "babel-preset-react": "^6.5.0",
+    "form-serialize": "^0.7.1",
     "jquery": "^2.2.4",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
+    "react-popup": "^0.4.2",
     "react-router": "^2.4.0",
     "underscore": "^1.8.3"
   }
