@@ -106,15 +106,14 @@ class FormBuilder extends Component {
     let form = document.querySelector('#query-form');
     let obj = serialize(form, { hash: true });
 
-    let params = [];
-    let requestPayload = {};
+    let payload = {};
     _.mapObject(obj, function(val, key){
-      requestPayload['"'+key+'"'] = val
+      payload['"'+key+'"'] = val
     });
-    console.log(requestPayload)
     let formData = {};
-    formData.params = requestPayload;
+    formData.params = payload;
     formData.queryId = this.props.data.insQueryId;
+    console.log(formData)
     executeQuery(this, formData);
   }
 
