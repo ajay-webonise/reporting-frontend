@@ -75,7 +75,7 @@ class Insight extends Component {
   shouldComponentUpdate(oldData, newData) {
     Popup.create({
         title: null,
-        content: <FormBuilder data={newData.insightDetails} />,
+        content: <FormBuilder data={newData} />,
         className: 'alert'
     });
     return true
@@ -107,14 +107,13 @@ class FormBuilder extends Component {
     let obj = serialize(form, { hash: true });
 
     let params = [];
+    let requestPayload = {};
     _.mapObject(obj, function(val, key){
-      params.push({
-        name: key,
-        value: val
-      })
+      requestPayload['"'+key+'"'] = val
     });
+    console.log(requestPayload)
     let formData = {};
-    formData.params = params;
+    formData.params = requestPayload;
     formData.queryId = this.props.data.insQueryId;
     executeQuery(this, formData);
   }
@@ -122,7 +121,7 @@ class FormBuilder extends Component {
   render() {
     return (
       <form onSubmit={this.submit.bind(this)} id="query-form">
-        {this.props.data.queryParam.map(function(field, key){
+        {this.props.data.insightDetails.queryParam.map(function(field, key){
           return (
               <div className="form-group" key={key}>
                 <label htmlFor={field.insQryParamId +'-'+ field.insQryParamName}>{field.insQryQualifiedParamName}</label>
