@@ -19,9 +19,6 @@ class reportList extends Component {
     getInsights(this);
   }
 
-  componentDidMount(){
-  }
-
   render() {
     return (
       <div className="container">
@@ -66,7 +63,7 @@ class Insight extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      insightDetails: false,
+      insightDetails: {},
       insightDetailsLoadingStatus: false
     }
   }
@@ -76,10 +73,9 @@ class Insight extends Component {
   }
 
   shouldComponentUpdate(oldData, newData) {
-    console.log(newData)
     Popup.create({
         title: null,
-        content: <FormBuilder data={newData} />,
+        content: <FormBuilder data={newData.insightDetails} />,
         className: 'alert'
     });
     return true
@@ -126,7 +122,7 @@ class FormBuilder extends Component {
   render() {
     return (
       <form onSubmit={this.submit.bind(this)} id="query-form">
-        {this.props.data.insightDetails.map(function(field, key){
+        {this.props.data.queryParam.map(function(field, key){
           return (
               <div className="form-group" key={key}>
                 <label htmlFor={field.insQryParamId +'-'+ field.insQryParamName}>{field.insQryQualifiedParamName}</label>
