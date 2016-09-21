@@ -8,7 +8,8 @@ class createInsights extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errormessage: '',
+      formKey: Math.random(),
+      error: '',
       queryParams: [],
       insightQuery: {
         insQueryId: '',
@@ -49,7 +50,7 @@ class createInsights extends Component {
 
   updateQueryParams(params){
     this.setState({
-      errormessage:"",
+      error:"",
       queryParams:params,
       insightQuery: {
         insQueryId:this.state.insQueryId,
@@ -99,7 +100,11 @@ class createInsights extends Component {
         <div className="page-header">
           <h1>Create Insight</h1>
         </div>
-        <form onSubmit={this.submit.bind(this)}>
+        {this.state.error
+          ? <div className="alert alert-warning">{JSON.stringify(this.state.error)}</div>
+          : null
+        }
+        <form onSubmit={this.submit.bind(this)} key={this.state.formKey}>
           <div className="form-group">
             <label htmlFor="insightsTitle">Insights Title</label>
             <input type="text" className="form-control" id="insightsTitle" placeholder="Insights Title" defaultValue={this.state.insQueryTitle} onChange={this.change.bind(this, 'insQueryTitle')}/>

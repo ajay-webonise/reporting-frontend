@@ -29,11 +29,12 @@ function createInsight($this, userData = null) {
   ajax({
     url: '/api/insights/',
     type: 'POST',
-    contentType: 'application/x-www-form-urlencoded',
+    contentType: 'application/json',
     data: userData
   }).then(
     function successHandler(data) {
       $this.setState({
+        formKey: Math.random(),
         createdInsideStatus: true
       });
     },
