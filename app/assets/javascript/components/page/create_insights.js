@@ -87,8 +87,8 @@ class createInsights extends Component {
   submit(event) {
     event.preventDefault();
     let data = {
-      insightQuery: this.state.queryParams,
-      queryParam: this.state.insightQuery
+      insightQuery: this.state.insightQuery,
+      queryParam: this.state.queryParams
     };
 
     createInsight(this, data);

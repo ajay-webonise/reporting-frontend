@@ -38,7 +38,10 @@ class reportList extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <Insight insight={this.state.insight[0]} />
+                      {this.state.insight.map(function(insight,key){
+                          return <Insight insight={insight} key = {key} />
+                      })
+                    }
                     </tbody>
                   </table>
                 )
@@ -54,7 +57,7 @@ class reportList extends Component {
 class Insight extends Component {
   render() {
     return (
-      <tr>
+      <tr key  = {this.props.key}>
         <th scope="row">{this.props.insight.insQueryId}</th>
         <td>{this.props.insight.insQueryKey}</td>
         <td>{this.props.insight.insQueryTitle}</td>
