@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import { getInsights} from '../../services/api'
+import { getInsights} from '../../services/api';
 
 class reportList extends Component {
 

@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 
+import { createInsight} from '../../services/api';
+
 class createInsights extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       errormessage: '',
-      queryParams: [
-        {"insQryParamId":"","insQueryId":"","insQryParamName":"username","insQryQualifiedParamName":"Please enter the username"},
-        {"insQryParamId":"","insQueryId":"","insQryParamName":"userid","insQryQualifiedParamName":"Please entry the userid"}
-      ],
+      queryParams: [],
       insightQuery: {
         insQueryId: '',
         insQueryKey: '',
         insQueryTitle: '',
         insQueryDescription: '',
         insQueryIsActive: false,
-        insQuery: 'select * from user where username=:username and userid=:userid'
+        insQuery: ''
       },
       insQueryId: '',
       insQueryKey: '',
       insQueryTitle: '',
       insQueryDescription: '',
       insQueryIsActive: false,
-      insQuery: 'select * from user where username=:username and userid=:userid'
+      insQuery: ''
     };
+  }
+
+  change(key, event) {
+    this.generateQuery()
   }
 
   generateQuery() {
@@ -82,8 +85,12 @@ class createInsights extends Component {
 
   submit(event) {
     event.preventDefault();
-    console.log(this.state.queryParams)
-    console.log(this.state.insightQuery)
+    let data = {
+      insightQuery: this.state.queryParams,
+      queryParam: this.state.insightQuery
+    };
+
+    createInsight(this, data);
   }
 
   render() {
@@ -95,24 +102,24 @@ class createInsights extends Component {
         <form onSubmit={this.submit.bind(this)}>
           <div className="form-group">
             <label htmlFor="insightsTitle">Insights Title</label>
-            <input type="text" className="form-control" id="insightsTitle" placeholder="Insights Title" defaultValue={this.state.insQueryTitle} />
+            <input type="text" className="form-control" id="insightsTitle" placeholder="Insights Title" defaultValue={this.state.insQueryTitle} onChange={this.change.bind(this, 'insQueryTitle')}/>
           </div>
           <div className="form-group">
             <label htmlFor="insightsDescription">Insights Description</label>
-            <input type="text" className="form-control" id="insightsDescription" placeholder="Insights Description" defaultValue={this.state.insQueryDescription} />
+            <input type="text" className="form-control" id="insightsDescription" placeholder="Insights Description" defaultValue={this.state.insQueryDescription} onChange={this.change.bind(this, 'insQueryDescription')} />
           </div>
           <div className="form-group">
             <label htmlFor="insightsKey">Insights Key</label>
-            <input type="text" className="form-control" id="insightsKey" placeholder="Insights Key" defaultValue={this.state.insQueryKey} />
+            <input type="text" className="form-control" id="insightsKey" placeholder="Insights Key" defaultValue={this.state.insQueryKey} onChange={this.change.bind(this, 'insQueryKey')} />
           </div>
           <div className="form-group">
             <label htmlFor="insightsQuery">Enter Query</label>
-            <textarea className="form-control" rows="3" id="insightsQuery" onChange={this.generateQuery.bind(this)} defaultValue={this.state.insQuery}></textarea>
+            <textarea className="form-control" rows="3" id="insightsQuery" onChange={this.change.bind(this, 'insightsQuery')} defaultValue={this.state.insQuery}></textarea>
           </div>
           <div className="form-group">
             <div className="checkbox">
               <label>
-                <input type="checkbox" id="isActiveFlag" checked={this.state.insQueryIsActive} onChange={this.queryIsActive.bind(this)}/> Is query active?
+                <input type="checkbox" id="isActiveFlag" checked={this.state.insQueryIsActive} onChange={this.change.bind(this, 'isActiveFlag')} /> Is query active?
               </label>
             </div>
           </div>
