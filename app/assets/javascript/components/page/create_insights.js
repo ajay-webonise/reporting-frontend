@@ -13,15 +13,15 @@ class createInsights extends Component {
       ],
       insightQuery: {
         insQueryId: '',
-        insQueryKey: null,
-        insQueryTitle: null,
+        insQueryKey: '',
+        insQueryTitle: '',
         insQueryDescription: '',
         insQueryIsActive: false,
         insQuery: 'select * from user where username=:username and userid=:userid'
       },
       insQueryId: '',
-      insQueryKey: null,
-      insQueryTitle: null,
+      insQueryKey: '',
+      insQueryTitle: '',
       insQueryDescription: '',
       insQueryIsActive: false,
       insQuery: 'select * from user where username=:username and userid=:userid'
@@ -82,7 +82,6 @@ class createInsights extends Component {
 
   submit(event) {
     event.preventDefault();
-    // alert(JSON.stringify(this.state.queryParams));
     console.log(this.state.queryParams)
     console.log(this.state.insightQuery)
   }

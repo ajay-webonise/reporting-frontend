@@ -1,47 +1,23 @@
 import { ajax } from './restutils'
 
 
-function getNasaPlanetary($this, userData = null) {
+function getInsights($this, userData = null) {
   ajax({
-    url: 'https://api.nasa.gov/planetary/apod?api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo',
+    url: '/api/insights/',
     type: 'GET',
     contentType: 'application/json',
     data: userData
   }).then(
     function successHandler(data) {
       $this.setState({
-        planetary: data,
-        planetaryLoadingStatus: true
+        insight: data,
+        insightLoadingStatus: true
       });
     },
     function errorHandler(error, textStatus, errorThrown) {
       $this.setState({
         error: error,
-        planetaryLoadingStatus: true
-      });
-    }
-  ).catch(function errorHandler(error) {
-    console.error(error)
-  })
-}
-
-function getGithubUsers($this, userData = null) {
-  ajax({
-    url: 'https://api.github.com/users',
-    type: 'GET',
-    contentType: 'application/json',
-    data: userData
-  }).then(
-    function successHandler(data) {
-      $this.setState({
-        githubUsers: data,
-        githubUsersLoadingStatus: true
-      });
-    },
-    function errorHandler(error, textStatus, errorThrown) {
-      $this.setState({
-        error: error,
-        githubUsersLoadingStatus: true
+        insightLoadingStatus: true
       });
     }
   ).catch(function errorHandler(error) {
@@ -51,6 +27,5 @@ function getGithubUsers($this, userData = null) {
 
 
 module.exports = {
-  getNasaPlanetary,
-  getGithubUsers
+  getInsights
 };
