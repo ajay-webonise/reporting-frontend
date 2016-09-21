@@ -101,7 +101,7 @@ class createInsights extends Component {
           <h1>Create Insight</h1>
         </div>
         {this.state.error
-          ? <div className="alert alert-warning">{JSON.stringify(this.state.error)}</div>
+          ? <div className="alert alert-danger">{JSON.stringify(this.state.error)}</div>
           : null
         }
         <form onSubmit={this.submit.bind(this)} key={this.state.formKey}>

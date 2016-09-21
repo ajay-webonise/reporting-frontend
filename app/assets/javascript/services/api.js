@@ -30,7 +30,7 @@ function createInsight($this, userData = null) {
     url: '/api/insights/',
     type: 'POST',
     contentType: 'application/json',
-    data: userData
+    data: JSON.stringify(userData)
   }).then(
     function successHandler(data) {
       $this.setState({
