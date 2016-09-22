@@ -81,11 +81,15 @@ function executeQuery($this, userData = null) {
     data: JSON.stringify(userData)
   }).then(
     function successHandler(data) {
+      console.log(data)
       // navigate to next page
       sessionStorage.setItem('currentResultSet', data);
       window.location='/#/insight_result';
     },
     function errorHandler(error, textStatus, errorThrown) {
+      console.log(error)
+      sessionStorage.setItem('currentResultSet', error.responseText);
+      window.location='/#/insight_result';
       $this.setState({
         error: error
       });
