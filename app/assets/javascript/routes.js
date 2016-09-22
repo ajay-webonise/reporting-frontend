@@ -11,6 +11,7 @@ import About from './components/page/about';
 import PageNotFound from './components/page/pageNotFound';
 import Home from './components/page/home';
 import Reports from './components/page/reportList';
+import InsightResult from './components/page/insight_result';
 
 const Root = React.createClass({
   render() {
@@ -21,6 +22,7 @@ const Root = React.createClass({
           <Route name="about" path='/about' component={About} />
           <Route name="nsightsPlaner" path='/insights-planer' component={CreateInsights} />
           <Route name="Reports" path='/reports' component={Reports} />
+          <Route name="insight_result" path='/insight_result' component={InsightResult} />
         </Route>
         <Route path="*" component={PageNotFound} />
       </Router>

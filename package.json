@@ -63,6 +63,7 @@
     "react-dom": "^15.0.2",
     "react-popup": "^0.4.2",
     "react-router": "^2.4.0",
+    "reactable": "^0.14.0",
     "underscore": "^1.8.3"
   }
 }
