@@ -22,7 +22,9 @@ class reportList extends Component {
   render() {
     return (
       <div className="container">
-        <Popup />
+        <Popup
+          closeBtn={true}
+          closeHtml={null} />
         <div className="page-header">
           <h1>All Insights</h1>
         </div>
