@@ -82,7 +82,8 @@ function executeQuery($this, userData = null) {
   }).then(
     function successHandler(data) {
       // navigate to next page
-      console.log(data);
+      sessionStorage.setItem('currentResultSet', data);
+      window.location='/#/insight_result';
     },
     function errorHandler(error, textStatus, errorThrown) {
       $this.setState({
