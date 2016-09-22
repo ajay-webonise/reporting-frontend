@@ -35,10 +35,10 @@ class reportList extends Component {
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>insQueryKey</th>
-                        <th>insQueryTitle</th>
-                        <th>insQueryDescription</th>
-                        <th>Execute</th>
+                        <th>Insight Key</th>
+                        <th>Insight Title</th>
+                        <th>Insight Description</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -113,21 +113,23 @@ class FormBuilder extends Component {
     let formData = {};
     formData.params = payload;
     formData.queryId = this.props.data.insQueryId;
-    console.log(formData)
     executeQuery(this, formData);
   }
 
   render() {
     return (
       <form onSubmit={this.submit.bind(this)} id="query-form">
-        {this.props.data.insightDetails.queryParam.map(function(field, key){
-          return (
-              <div className="form-group" key={key}>
-                <label htmlFor={field.insQryParamId +'-'+ field.insQryParamName}>{field.insQryQualifiedParamName}</label>
-                <input type="text" className="form-control" id={field.insQryParamId +'-'+ field.insQryParamName} name={field.insQryParamName} />
-              </div>
-            )
-        })}
+        {this.props.data.insightDetails.queryParam !== null
+          ? this.props.data.insightDetails.queryParam.map(function(field, key){
+              return (
+                  <div className="form-group" key={key}>
+                    <label htmlFor={field.insQryParamId +'-'+ field.insQryParamName}>{field.insQryQualifiedParamName}</label>
+                    <input type="text" className="form-control" id={field.insQryParamId +'-'+ field.insQryParamName} name={field.insQryParamName} />
+                  </div>
+                )
+            })
+          : <p>Query doesn't have any parameters, Please click submit to execute the query</p>
+        }
         <button className="btn btn-default">Submit</button>
       </form>
     )

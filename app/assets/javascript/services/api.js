@@ -58,12 +58,15 @@ function createInsight($this, userData = null) {
     data: JSON.stringify(userData)
   }).then(
     function successHandler(data) {
+      console.log(data);
       $this.setState({
         formKey: Math.random(),
         createdInsideStatus: true
       });
     },
+
     function errorHandler(error, textStatus, errorThrown) {
+      console.log(error);
       $this.setState({
         error: error
       });
@@ -80,19 +83,14 @@ function executeQuery($this, userData = null) {
     contentType: 'application/json',
     data: JSON.stringify(userData)
   }).then(
-    function successHandler(data) {
-      console.log(data)
-      // navigate to next page
-      sessionStorage.setItem('currentResultSet', data);
-      window.location='/#/insight_result';
-    },
     function errorHandler(error, textStatus, errorThrown) {
-      console.log(error)
-      sessionStorage.setItem('currentResultSet', error.responseText);
-      window.location='/#/insight_result';
       $this.setState({
         error: error
       });
+    },
+    function successHandler(data) {
+      sessionStorage.setItem('currentResultSet', data.responseText);
+      window.location='/#/insight_result';
     }
   ).catch(function errorHandler(error) {
     console.error(error)
